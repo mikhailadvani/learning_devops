@@ -1,5 +1,6 @@
 require 'aws-sdk'
 require 'pry'
+require 'json'
 
 def get_instance_ids instances_descriptor
   instance_ids = []
@@ -11,6 +12,7 @@ def get_instance_ids instances_descriptor
 end
 
 ec2 = Aws::EC2::Client.new()
-instances_descriptor = ec2.describe_instances[:reservations]
+filters = JSON.parse(File.read("instance_filter.json")) || {}
+instances_descriptor = ec2.describe_instances(filters)[:reservations]
 instance_ids = get_instance_ids instances_descriptor
 puts instance_ids
