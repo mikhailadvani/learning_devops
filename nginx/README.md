@@ -30,10 +30,11 @@ Basic how to's of nginx configs at http://nginx.org/en/docs/beginners_guide.html
 
 ###Setup nginx on a node
 
-See route /static/ in web/default.conf
-See route /app-static/ in app/default.conf
+See route /static/ in <a href="https://github.com/mikhailadvani/learning_devops/blob/master/nginx/web/default.conf">web/default.conf</a>
 
-###Proxy Pass an nginx route on the web layer node to app layer node. The app layer node will then be blocked using some security mechanism(not sure of the term yet)
+See route /app-static/ in <a href="https://github.com/mikhailadvani/learning_devops/blob/master/nginx/app/default.conf">app/default.conf</a>
+
+####Proxy Pass an nginx route on the web layer node to app layer node. The app layer node will then be blocked using some security mechanism(not sure of the term yet)
 
 See route /app-static/ in web/default.conf
 The IP will be the elastic IP assigned to the lower layer node
