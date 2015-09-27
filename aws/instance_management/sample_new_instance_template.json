@@ -1,0 +1,19 @@
+{
+    "dry_run": true,
+    "min_count": 1,
+    "max_count": 1,
+    "image_id": "<This is the OS selection>",
+    "key_name": "<Name of the key pair that has been created>",
+    "instance_type": "<One of t1.micro t2.micro etc>",
+    "placement": {
+        "availability_zone": "<One of us-east-1a us-east-1b us-east-1c us-east-1d>",
+        "group_name": "",
+        "tenancy": "<default or dedicated>"
+    },
+    "security_group_ids": ["<id of the security group>"],
+    "monitoring": {
+        "enabled": false
+    },
+    "subnet_id": "<id of the subnet>",
+    "instance_initiated_shutdown_behavior": "stop"
+}
