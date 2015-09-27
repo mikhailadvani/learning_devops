@@ -1,0 +1,5 @@
+#Either "source" this file else copy these to your ~/.bashrc or ~/.bash_profile file
+
+export AWS_ACCESS_KEY_ID='Access Key Id'
+export AWS_SECRET_ACCESS_KEY='Secret Access Key'
+export AWS_REGION='Your AWS region'
