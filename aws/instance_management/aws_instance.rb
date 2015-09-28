@@ -27,6 +27,18 @@ class AwsInstance
     end
   end
 
+  def terminate_instance dry_run=true
+    begin
+      @ec2.terminate_instances({dry_run: dry_run, instance_ids: [@id]})
+      puts "Instance terminated"
+      @id= nil
+    rescue Aws::EC2::Errors::DryRunOperation
+      puts "Dry run successful"
+    rescue Exception => e
+      puts "Execution unsuccessful: #{e.message}"
+    end
+  end
+
   def start_instance
     begin
       @ec2.start_instances({instance_ids: [@id]})
