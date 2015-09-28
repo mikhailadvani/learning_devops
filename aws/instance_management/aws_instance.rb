@@ -30,8 +30,6 @@ class AwsInstance
     begin
       @ec2.start_instances({instance_ids: [@id]})
       wait_until :instance_running
-    rescue Aws::EC2::Errors::InvalidInstanceIDNotFound => invalidIdException
-      puts invalidIdException.message
     rescue Exception => e
       puts e.message
     end
@@ -41,8 +39,6 @@ class AwsInstance
     begin
       @ec2.stop_instances({instance_ids: [@id]})
       wait_until :instance_stopped
-    rescue Aws::EC2::Errors::InvalidInstanceIDNotFound => invalidIdException
-      puts invalidIdException.message
     rescue Exception => e
       puts e.message
     end
@@ -54,9 +50,14 @@ class AwsInstance
   end
 
   def get_instance_status
-    @ec2.describe_instances({instance_ids: [@id]})[:reservations][0][:instances][0][:state][:name]
+    begin
+      @ec2.describe_instances({instance_ids: [@id]})[:reservations][0][:instances][0][:state][:name]
+    rescue Exception => e
+      puts e.message
+    end
   end
 
+  private
   def wait_until state
     @ec2.wait_until(state, {instance_ids: [@id]})
   end
