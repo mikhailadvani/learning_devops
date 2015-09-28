@@ -1,4 +1,13 @@
 class AwsInstance
+  STATUS = {
+      :PENDING => "pending",
+      :RUNNING => "running",
+      :SHUTTING_DOWN => "shutting-down",
+      :TERMINATED => "terminated",
+      :STOPPING => "stopping",
+      :STOPPED => "stopped"
+  }
+
   def initialize id=nil
     @ec2 = Aws::EC2::Client.new()
     @id = id
@@ -37,6 +46,10 @@ class AwsInstance
     rescue Exception => e
       puts e.message
     end
+  end
+
+  def get_instance_status
+    @ec2.describe_instances({instance_ids: [@id]})[:reservations][0][:instances][0][:state][:name]
   end
 
   def wait_until state
