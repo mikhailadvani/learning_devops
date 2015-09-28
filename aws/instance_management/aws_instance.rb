@@ -13,12 +13,13 @@ class AwsInstance
     @id = id
   end
 
-  def create_instance instance_config, dry_run=true
+  def create_instance instance_config, dry_run=true, tags=[]
     instance_config.merge!(min_count: 1, max_count: 1, dry_run: dry_run)
     begin
       response = @ec2.run_instances(instance_config)
       @id = response[:instances][0][:instance_id]
       puts "Instance created with id: #{@id}"
+      add_tags tags
     rescue Aws::EC2::Errors::DryRunOperation
       puts "Dry run successful"
     rescue Exception => e
@@ -58,6 +59,11 @@ class AwsInstance
   end
 
   private
+
+  def add_tags tags
+    @ec2.create_tags({resources: [@id], tags: tags}) unless tags.empty?
+  end
+
   def wait_until state
     @ec2.wait_until(state, {instance_ids: [@id]})
   end
