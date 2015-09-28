@@ -48,6 +48,11 @@ class AwsInstance
     end
   end
 
+  def restart_instance
+    self.stop_instance
+    self.start_instance
+  end
+
   def get_instance_status
     @ec2.describe_instances({instance_ids: [@id]})[:reservations][0][:instances][0][:state][:name]
   end
