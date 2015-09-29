@@ -1,4 +1,4 @@
 aws/.keys/
 .idea
 .idea/*
-aws/instance_management/templates/new_instance_template.json
+aws/lib/templates/new_instance_template.json
