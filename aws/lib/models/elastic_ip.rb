@@ -19,11 +19,19 @@ class ElasticIp
   end
 
   def associate instance_id
-    @association_id = @ec2.associate_address({dry_run: false, instance_id: instance_id, allocation_id: @allocation_id, allow_reassociation: true})[:association_id]
+    begin
+      @association_id = @ec2.associate_address({dry_run: false, instance_id: instance_id, allocation_id: @allocation_id, allow_reassociation: true})[:association_id]
+    rescue Exception => e
+      puts e.message
+    end
   end
 
   def dissociate
-    @ec2.disassociate_address({dry_run: false, association_id: @association_id})
+    begin
+      @ec2.disassociate_address({dry_run: false, association_id: @association_id}) if self.associated?
+    rescue Exception => e
+      puts e.message
+    end
   end
 
   def associated?
