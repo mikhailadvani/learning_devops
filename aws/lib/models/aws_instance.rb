@@ -23,7 +23,7 @@ class AwsInstance
     rescue Aws::EC2::Errors::DryRunOperation
       puts "Dry run successful"
     rescue Exception => e
-      puts "Execution unsuccessful: #{e.message}"
+      puts e.message
     end
   end
 
@@ -35,7 +35,7 @@ class AwsInstance
     rescue Aws::EC2::Errors::DryRunOperation
       puts "Dry run successful"
     rescue Exception => e
-      puts "Execution unsuccessful: #{e.message}"
+      puts e.message
     end
   end
 
