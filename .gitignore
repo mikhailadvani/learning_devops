@@ -2,3 +2,5 @@ aws/.keys/
 .idea
 .idea/*
 aws/lib/templates/new_instance_template.json
+key-generation/*.pem
+key-generation/*.txt
