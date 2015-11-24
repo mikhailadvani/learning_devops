@@ -70,6 +70,14 @@ class AwsInstance
     end
   end
 
+  def describe_instance
+    begin
+      @ec2.describe_instances({instance_ids: [@id]})[:reservations][0][:instances][0]
+    rescue Exception => e
+      puts e.message
+    end
+  end
+
   private
 
   def add_tags tags

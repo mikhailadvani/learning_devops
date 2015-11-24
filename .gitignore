@@ -1,6 +1,8 @@
 aws/.keys/
+.idea/learning_devops.iml
 .idea
 .idea/*
 aws/lib/templates/new_instance_template.json
 key-generation/*.pem
 key-generation/*.txt
+*.DS_Store
